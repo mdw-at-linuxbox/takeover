@@ -28,14 +28,6 @@ standard_users:
   uid: 1035
   group: 100
   fullname: Adam Emerson
-- loginid: cbodley
-  uid: 1041
-  group: 100
-  fullname: Casey Bodley
-- loginid: dang
-  uid: 1042
-  group: 100
-  fullname: Daniel Gryniewicz
 - loginid: bill
   uid: 1044
   group: 100
