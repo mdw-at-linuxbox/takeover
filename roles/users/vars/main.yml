@@ -1,0 +1,46 @@
+---
+standard_users:
+- loginid: tserlin
+  uid: 1003
+  group: 100
+  fullname: Thomas Serlin
+- loginid: ali
+  uid: 1004
+  group: 100
+  fullname: Ali Maredia
+- loginid: mbenjamin
+  uid: 1007
+  group: 100
+  fullname: Matt W. Benjamin
+- loginid: cbodley
+  uid: 1041
+  group: 100
+  fullname: Casey Bodley
+- loginid: dang
+  uid: 1042
+  group: 100
+  fullname: Daniel Gryniewicz
+- loginid: ivancich
+  uid: 1031
+  group: 100
+  fullname: J. Eric Ivancich
+- loginid: aemerson
+  uid: 1035
+  group: 100
+  fullname: Adam Emerson
+- loginid: cbodley
+  uid: 1041
+  group: 100
+  fullname: Casey Bodley
+- loginid: dang
+  uid: 1042
+  group: 100
+  fullname: Daniel Gryniewicz
+- loginid: bill
+  uid: 1044
+  group: 100
+  fullname: William Simpson
+- loginid: mdw
+  uid: 25131
+  group: 100
+  fullname: Marcus Watts

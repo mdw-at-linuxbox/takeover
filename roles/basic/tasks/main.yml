@@ -1,0 +1,39 @@
+---
+# install basic stuff
+- name: entropy
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items: [ rng-tools ]
+  become: true
+
+- name: timezone
+  timezone:
+    name: America/Detroit
+  become: true
+
+- name: get ephemeral hostname
+  command: hostname
+  check_mode: no
+  register: ephemeral_hostname
+  changed_when: no
+
+- name: ephemeral hostname
+  command: hostname {{inventory_hostname}}
+  become: true
+  when: inventory_hostname != ephemeral_hostname.stdout
+
+- name: persist
+  copy:
+    content: "{{ inventory_hostname }}"
+    dest: /etc/hostname
+    group: root
+    owner: root
+    mode: 0644
+  become: true
+  register: persist_out
+  changed_when: persist_out.changed
+#
+#- name: reportout
+#  debug:
+#   var: persist_out

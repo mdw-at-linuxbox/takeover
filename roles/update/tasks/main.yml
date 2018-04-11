@@ -1,0 +1,14 @@
+---
+# make sure everything is up to date.
+- name: update
+  tags: baz
+  yum:
+    name: "*"
+    state: latest
+  become: true
+#  register: foo
+
+#- name: report
+#  tags: baz
+#  debug:
+#   msg: "{{ foo }}"

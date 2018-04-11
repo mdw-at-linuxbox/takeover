@@ -1,0 +1,5 @@
+ansible.cfg
+files/*
+group_vars/*
+,*
+*.retry

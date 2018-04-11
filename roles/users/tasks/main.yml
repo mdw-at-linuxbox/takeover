@@ -1,0 +1,68 @@
+---
+# install my standard users
+#- name: report
+#  debug:
+#    msg: "name={{ item.loginid }} comment={{ item.fullname }} uid={{ item.uid }} password={{ default_user_pass }}"
+#  with_items: "{{ standard_users }}"
+
+- name: make standard users
+  user:
+    name: "{{ item.loginid }}"
+    comment: "{{ item.fullname }}"
+    uid: "{{ item.uid }}"
+    password: "{{ default_user_pass }}"
+  with_items: "{{ standard_users }}"
+  become: true
+
+- name: make sudoers
+  template:
+    src: sudoers.j2
+    dest: /etc/sudoers.d/cohortfs
+    owner: root
+    group: root
+    mode: 0440
+  become: true
+
+- name: make temp directory
+  local_action:
+    module: file
+    path: /tmp/takeover_temp
+    state: directory
+#  no_log: yes
+
+- name: extract ssh keys locally
+  tags: foo
+  local_action:
+    module: unarchive
+    src: ssh-keys.tar.xz
+    dest: /tmp/takeover_temp
+  changed_when: false
+#  no_log: yes
+
+- name: find out what ssh keys extracted
+  tags: foo
+  local_action:
+   module: find
+   paths: /tmp/takeover_temp
+   file_type: directory
+   patterns: "*"
+   use_regex: no
+  register: find_authorized_keys
+#
+#- name: report3
+#  tags: foo
+#  debug:
+##   msg: "{{ 'file=' + item.path }}"
+##   msg: "{{ 'file=' + item.path + '/.ssh/authorized_keys user=' }}"
+#   msg: "{{ item.path | regex_replace('.*/', '') }}"
+##   msg: "{{ 'file=' + item.path + '/.ssh/authorized_keys user=' + (item.path | regex_replace('(.*)/.*', '\1')) }}"
+#  with_items: "{{ find_authorized_keys.files }}"
+
+- name: install ssh keys
+  authorized_key:
+    user: "{{ item.path | regex_replace('.*/', '') }}"
+    state: present
+    key: "{{ lookup('file', item.path + '/.ssh/authorized_keys') }}"
+  when: (item.path | regex_replace('.*/', '')) in standard_users
+  become: true
+  with_items: "{{ find_authorized_keys.files }}"
