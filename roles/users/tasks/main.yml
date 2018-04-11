@@ -40,7 +40,7 @@
 #  no_log: yes
 
 - name: find out what ssh keys extracted
-  tags: foo
+  tags: tellme
   local_action:
    module: find
    paths: /tmp/takeover_temp
@@ -57,12 +57,20 @@
 #   msg: "{{ item.path | regex_replace('.*/', '') }}"
 ##   msg: "{{ 'file=' + item.path + '/.ssh/authorized_keys user=' + (item.path | regex_replace('(.*)/.*', '\1')) }}"
 #  with_items: "{{ find_authorized_keys.files }}"
+#
+#- name: tellme
+#  tags: tellme
+#  debug:
+##   msg: (item.path | regex_replace('.*/', '')) in standard_users
+#   msg: "{{ 'item.path=' + (item.path | regex_replace('.*/', '')) + ' present=' + ('y' if (item.path | regex_replace('.*/', '') in (standard_users | map(attribute='loginid'))) else 'n') }}"
+##   msg: "{{ standard_users | map(attribute='loginid') | list }}"
+#  with_items: "{{ find_authorized_keys.files }}"
 
 - name: install ssh keys
   authorized_key:
     user: "{{ item.path | regex_replace('.*/', '') }}"
     state: present
     key: "{{ lookup('file', item.path + '/.ssh/authorized_keys') }}"
-  when: (item.path | regex_replace('.*/', '')) in standard_users
+  when: item.path | regex_replace('.*/', '') in (standard_users | map(attribute='loginid'))
   become: true
   with_items: "{{ find_authorized_keys.files }}"
