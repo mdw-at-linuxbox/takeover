@@ -1,10 +1,18 @@
 ---
 # install basic stuff
-- name: entropy
+- name: install rng-tools
   yum:
     name: "{{ item }}"
     state: present
   with_items: [ rng-tools ]
+  become: true
+
+- name: enable rngd
+  tags: test3
+  systemd:
+   name: rngd.service
+   enabled: yes
+   state: started
   become: true
 
 - name: timezone
