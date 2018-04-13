@@ -1,5 +1,18 @@
 ---
 # copy over dot, bin
+- name: stat mdw bin
+  stat:
+    path: /home/mdw/bin
+  check_mode: no
+  register: mdw_bin
+
+- name: stat mdw hgrc
+  stat:
+    path: /home/mdw/.hgrc
+    get_md5: no
+  check_mode: no
+  register: mdw_hgrc
+
 - name: extract mdw tarballs
   unarchive:
     src: "{{ item }}"
@@ -9,6 +22,7 @@
   become: true
   when:
    - ansible_os_family == 'Debian'
+   - not mdw_hgrc.stat.exists or not mdw_bin.stat.exists
 
 - name: extract mdw tarballs
   unarchive:
@@ -19,6 +33,7 @@
   become: true
   when:
    - ansible_os_family == 'RedHat'
+   - not mdw_hgrc.stat.exists or not mdw_bin.stat.exists
 
 - name: see if nvi installed
   tags: bar
