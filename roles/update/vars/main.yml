@@ -20,7 +20,6 @@ more_stuff_ubuntu:
 - git
 - git-man
 - gnupg2
-- gpart
 - krb5-config
 - krb5-multidev
 - krb5-user
@@ -45,7 +44,6 @@ more_stuff_ubuntu:
 - x11-utils
 - x11-xkb-utils
 - x11-xserver-utils
-- x11vnc
 - xbitmaps
 - xfonts-100dpi
 - xfonts-75dpi
@@ -59,7 +57,6 @@ more_stuff_ubuntu:
 more_stuff_centos:
 - bc
 - bind-utils
-- bvi
 - dmidecode
 - dump
 - ed
@@ -69,8 +66,6 @@ more_stuff_centos:
 - ftp
 - gdb
 - git
-- git-man
-- gpart
 - groff
 - hdparm
 - lsof
@@ -102,7 +97,6 @@ more_stuff_centos:
 - wget
 - whois
 - words
-- x11vnc
 - xauth
 - xorg-x11-xbitmaps
 - xterm
