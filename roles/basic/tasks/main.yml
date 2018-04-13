@@ -6,6 +6,8 @@
     state: present
   with_items: [ rng-tools ]
   become: true
+  when:
+   - ansible_os_family == 'RedHat'
 
 - name: enable rngd
   tags: test3
@@ -14,6 +16,17 @@
    enabled: yes
    state: started
   become: true
+  when:
+   - ansible_os_family == 'RedHat'
+
+- name: install haveged
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items: [ haveged ]
+  become: true
+  when:
+   - ansible_os_family == 'Debian'
 
 - name: timezone
   timezone:
@@ -33,7 +46,7 @@
 
 - name: persist
   copy:
-    content: "{{ inventory_hostname }}"
+    content: "{{ inventory_hostname }}\n"
     dest: /etc/hostname
     group: root
     owner: root

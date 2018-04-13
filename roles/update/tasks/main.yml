@@ -7,6 +7,37 @@
     state: latest
   become: true
 #  register: foo
+  when:
+   - ansible_os_family == 'RedHat'
+
+- name: install more stuff for centos
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ more_stuff_centos }}"
+  become: true
+  when:
+   - ansible_os_family == 'RedHat'
+
+- name: update
+  tags: baz
+  apt:
+   upgrade: yes
+   update_cache: yes
+  become: true
+#  register: foo
+  when:
+   - ansible_os_family == 'Debian'
+
+- name: install more stuff for ubuntu
+  tags: jam
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ more_stuff_ubuntu }}"
+  become: true
+  when:
+   - ansible_os_family == 'Debian'
 
 #- name: report
 #  tags: baz
