@@ -1,2 +1,4 @@
-{%- for user in standard_users %}{{ user.loginid }} ALL=(ALL) ALL
+{%- for user in standard_users %}{{ user.loginid }} ALL=(ALL)
+{%- if default_user_pass is not defined %} NOPASSWD:
+{%- endif %} ALL
 {% endfor -%}
