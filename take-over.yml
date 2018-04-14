@@ -6,6 +6,6 @@
   roles:
   - basic
   - users
-  - mdw
   - update
+  - mdw
 ...
