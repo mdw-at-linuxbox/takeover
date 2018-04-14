@@ -39,12 +39,12 @@
   register: ephemeral_hostname
   changed_when: no
 
-- name: ephemeral hostname
+- name: set ephemeral hostname
   command: hostname {{inventory_hostname}}
   become: true
   when: inventory_hostname != ephemeral_hostname.stdout
 
-- name: persist
+- name: persist hostname
   copy:
     content: "{{ inventory_hostname }}\n"
     dest: /etc/hostname
@@ -54,7 +54,56 @@
   become: true
   register: persist_out
   changed_when: persist_out.changed
+
 #
 #- name: reportout
 #  debug:
 #   var: persist_out
+
+- name: uname release
+  tags: ur
+  command: uname -a
+  register: uname_release
+  check_mode: no
+  changed_when: false
+
+- name: disable kdump for linode centos
+  tags: ur
+  service:
+   name: kdump
+   state: stopped
+   enabled: no
+  become: true
+  when:
+   - ansible_os_family == 'RedHat' and uname_release.stdout is search("linode")
+
+- name: disable ssh with passwords
+  tags: pw
+  lineinfile:
+   dest: /etc/ssh/sshd_config
+   regexp: '#*PasswordAuthentication [yn]'
+   line: 'PasswordAuthentication no'
+  become: true
+  register: ssh_with_passwords
+  when:
+   - disable_sshd_passwordauth is defined and disable_sshd_passwordauth
+
+- name: disable root login
+  tags: pw
+  lineinfile:
+   dest: /etc/ssh/sshd_config
+   regexp: '#*PermitRootLogin [yn]'
+   line: 'PermitRootLogin no'
+  become: true
+  register: root_login
+  when:
+   - disable_root_login is defined and disable_root_login
+
+- name: restart sshd if config changed
+  tags: pw
+  service:
+    name: "{{ 'sshd' if ansible_os_family == 'RedHat' else 'ssh' }}"
+    state: restarted
+  become: true
+  when:
+   - root_login.changed or ssh_with_passwords.changed
