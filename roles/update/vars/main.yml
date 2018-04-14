@@ -105,4 +105,5 @@ more_stuff_centos:
 - yum-plugin-keys
 - yum-plugin-local
 - yum-plugin-verify
+- yum-utils
 - zip
