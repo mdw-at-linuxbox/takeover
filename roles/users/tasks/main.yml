@@ -10,7 +10,8 @@
     name: "{{ item.loginid }}"
     comment: "{{ item.fullname }}"
     uid: "{{ item.uid }}"
-    password: "{{ default_user_pass }}"
+    group: "{{ item.group if item.group is defined else 100 }}"
+    password: "{{ default_user_pass if default_user_pass is defined else None }}"
   with_items: "{{ standard_users }}"
   become: true
 
