@@ -1,19 +1,26 @@
 ---
 # copy over dot, bin
 - name: stat mdw bin
+  tags: mdw
   stat:
     path: /home/mdw/bin
+  become_user: mdw
+  become: true
   check_mode: no
   register: mdw_bin
 
 - name: stat mdw hgrc
+  tags: mdw
   stat:
     path: /home/mdw/.hgrc
     get_md5: no
+  become_user: mdw
+  become: true
   check_mode: no
   register: mdw_hgrc
 
 - name: extract mdw tarballs
+  tags: mdw
   unarchive:
     src: "{{ item }}"
     dest: "/home/mdw"
@@ -25,6 +32,7 @@
    - not mdw_hgrc.stat.exists or not mdw_bin.stat.exists
 
 - name: extract mdw tarballs
+  tags: mdw
   unarchive:
     src: "{{ item }}"
     dest: "/home/mdw"
@@ -69,6 +77,7 @@
   alternatives:
    name: "{{ item.name }}"
    path: "{{ item.path }}"
+  become: true
   when:
    - ansible_os_family == 'Debian'
   loop:
