@@ -1,5 +1,5 @@
 ---
-# take over a host. (centos7 only for now)
+# take over a host.
 - hosts:
   - linode
 

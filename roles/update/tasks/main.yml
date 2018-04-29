@@ -8,16 +8,39 @@
   become: true
 #  register: foo
   when:
-   - ansible_os_family == 'RedHat'
+   - ansible_distribution == 'RedHat'
+   - ansible_distribution_major_version == '7'
 
-- name: install more stuff for centos
+- name: update
+  tags: baz
+  dnf:
+    name: "*"
+    state: latest
+  become: true
+#  register: foo
+  when:
+   - ansible_distribution == 'RedHat'
+   - ansible_distribution_major_version == '8'
+
+- name: install more stuff for el7
   yum:
     name: "{{ item }}"
     state: present
-  with_items: "{{ more_stuff_centos }}"
+  with_items: "{{ more_stuff_el7 }}"
   become: true
   when:
-   - ansible_os_family == 'RedHat'
+   - ansible_distribution == 'RedHat'
+   - ansible_distribution_major_version == '7'
+
+- name: install more stuff for el8
+  dnf:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ more_stuff_el8 }}"
+  become: true
+  when:
+   - ansible_distribution == 'RedHat'
+   - ansible_distribution_major_version == '8'
 
 - name: update
   tags: baz
@@ -27,7 +50,7 @@
   become: true
 #  register: foo
   when:
-   - ansible_os_family == 'Debian'
+   - ansible_distribution == 'Ubuntu'
 
 - name: install debconf-utils
   tags: jam
@@ -36,7 +59,7 @@
     state: present
   become: true
   when:
-   - ansible_os_family == 'Debian'
+   - ansible_distribution == 'Ubuntu'
 
 - name: set debconf defaults
   tags: jam
@@ -76,7 +99,7 @@
      value: 'No configuration'
   become: true
   when:
-   - ansible_os_family == 'Debian'
+   - ansible_distribution == 'Ubuntu'
 
 - name: install more stuff for ubuntu
   tags: jam
@@ -86,7 +109,7 @@
   with_items: "{{ more_stuff_ubuntu }}"
   become: true
   when:
-   - ansible_os_family == 'Debian'
+   - ansible_distribution == 'Ubuntu'
 
 #- name: report
 #  tags: baz

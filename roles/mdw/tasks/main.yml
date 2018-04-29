@@ -28,7 +28,7 @@
   become_user: mdw
   become: true
   when:
-   - ansible_os_family == 'Debian'
+   - ansible_distribution == 'Ubuntu'
    - not mdw_hgrc.stat.exists or not mdw_bin.stat.exists
 
 - name: extract mdw tarballs
@@ -36,11 +36,25 @@
   unarchive:
     src: "{{ item }}"
     dest: "/home/mdw"
-  with_items: "{{ mdw_tar_files_centos }}"
+  with_items: "{{ mdw_tar_files_el7 }}"
   become_user: mdw
   become: true
   when:
-   - ansible_os_family == 'RedHat'
+   - ansible_distribution == 'RedHat'
+   - ansible_distribution_major_version == '7'
+   - not mdw_hgrc.stat.exists or not mdw_bin.stat.exists
+
+- name: extract mdw tarballs
+  tags: mdw
+  unarchive:
+    src: "{{ item }}"
+    dest: "/home/mdw"
+  with_items: "{{ mdw_tar_files_el8 }}"
+  become_user: mdw
+  become: true
+  when:
+   - ansible_distribution == 'RedHat'
+   - ansible_distribution_major_version == '8'
    - not mdw_hgrc.stat.exists or not mdw_bin.stat.exists
 
 - name: see if nvi installed
@@ -57,7 +71,19 @@
    "https://people.redhat.com/~mwatts/bits/nvi-1.81.6-12.el7.centos.x86_64.rpm"
   when:
    - not nvi_stat.stat.exists
-   - ansible_os_family == 'RedHat'
+   - ansible_distribution == 'RedHat'
+   - ansible_distribution_major_version == '7'
+
+- name: nvi
+  tags: bar
+  raw: "yum install -y {{ item }}"
+  become: true
+  with_items: |
+   "https://dl.fedoraproject.org/pub/fedora/linux/releases/27/Everything/x86_64/os/Packages/n/nvi-1.81.6-17.fc27.x86_64.rpm"
+  when:
+   - not nvi_stat.stat.exists
+   - ansible_distribution == 'RedHat'
+   - ansible_distribution_major_version == '8'
 
 - name: nvi
   tags: bar
@@ -70,7 +96,7 @@
    - nvi-doc
   when:
    - not nvi_stat.stat.exists
-   - ansible_os_family == 'Debian'
+   - ansible_distribution == 'Ubuntu'
 
 - name: update vi alternatives
   tags: bar
@@ -79,7 +105,7 @@
    path: "{{ item.path }}"
   become: true
   when:
-   - ansible_os_family == 'Debian'
+   - ansible_distribution == 'Ubuntu'
   loop:
    - { name: 'vi', path: '/usr/bin/nvi' }
    - { name: 'view', path: '/usr/bin/nview' }

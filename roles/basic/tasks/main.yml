@@ -7,7 +7,19 @@
   with_items: [ rng-tools ]
   become: true
   when:
-   - ansible_os_family == 'RedHat'
+   - ansible_distribution == 'RedHat'
+   - ansible_distribution_major_version == '7'
+
+# install basic stuff
+- name: install rng-tools
+  dnf:
+    name: "{{ item }}"
+    state: present
+  with_items: [ rng-tools ]
+  become: true
+  when:
+   - ansible_distribution == 'RedHat'
+   - ansible_distribution_major_version == '8'
 
 - name: enable rngd
   tags: test3
@@ -17,7 +29,7 @@
    state: started
   become: true
   when:
-   - ansible_os_family == 'RedHat'
+   - ansible_distribution == 'RedHat'
 
 - name: install haveged
   apt:
@@ -26,7 +38,7 @@
   with_items: [ haveged ]
   become: true
   when:
-   - ansible_os_family == 'Debian'
+   - ansible_distribution == 'Ubuntu'
 
 - name: timezone
   timezone:
@@ -75,7 +87,7 @@
    enabled: no
   become: true
   when:
-   - ansible_os_family == 'RedHat' and uname_release.stdout is search("linode")
+   - ansible_distribution == 'RedHat' and uname_release.stdout is search("linode")
 
 - name: disable ssh with passwords
   tags: pw
@@ -102,7 +114,7 @@
 - name: restart sshd if config changed
   tags: pw
   service:
-    name: "{{ 'sshd' if ansible_os_family == 'RedHat' else 'ssh' }}"
+    name: "{{ 'sshd' if ansible_distribution == 'RedHat' else 'ssh' }}"
     state: restarted
   become: true
   when:
