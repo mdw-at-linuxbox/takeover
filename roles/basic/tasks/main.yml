@@ -52,20 +52,27 @@
   changed_when: no
 
 - name: set ephemeral hostname
-  command: hostname {{inventory_hostname}}
+  command: nmcli g h {{inventory_hostname}}
   become: true
   when: inventory_hostname != ephemeral_hostname.stdout
 
-- name: persist hostname
-  copy:
-    content: "{{ inventory_hostname }}\n"
-    dest: /etc/hostname
-    group: root
-    owner: root
-    mode: 0644
-  become: true
-  register: persist_out
-  changed_when: persist_out.changed
+#
+#- name: set ephemeral hostname
+#  command: hostname {{inventory_hostname}}
+#  become: true
+#  when: inventory_hostname != ephemeral_hostname.stdout
+#
+#- name: persist hostname
+#  copy:
+#    content: "{{ inventory_hostname }}\n"
+#    dest: /etc/hostname
+#    group: root
+#    owner: root
+#    mode: 0644
+#  become: true
+#  register: persist_out
+#  changed_when: persist_out.changed
+#  when: inventory_hostname != ephemeral_hostname.stdout
 
 #
 #- name: reportout
