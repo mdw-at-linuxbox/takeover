@@ -8,7 +8,7 @@
   become: true
 #  register: foo
   when:
-   - ansible_distribution == 'RedHat'
+   - ansible_os_family == 'RedHat'
    - ansible_distribution_major_version == '7'
 
 - name: update
@@ -19,7 +19,7 @@
   become: true
 #  register: foo
   when:
-   - ansible_distribution == 'RedHat'
+   - ansible_os_family == 'RedHat'
    - ansible_distribution_major_version == '8'
 
 - name: install more stuff for el7
@@ -29,7 +29,7 @@
   with_items: "{{ more_stuff_el7 }}"
   become: true
   when:
-   - ansible_distribution == 'RedHat'
+   - ansible_os_family == 'RedHat'
    - ansible_distribution_major_version == '7'
 
 - name: install more stuff for el8
@@ -39,7 +39,7 @@
   with_items: "{{ more_stuff_el8 }}"
   become: true
   when:
-   - ansible_distribution == 'RedHat'
+   - ansible_os_family == 'RedHat'
    - ansible_distribution_major_version == '8'
 
 - name: update

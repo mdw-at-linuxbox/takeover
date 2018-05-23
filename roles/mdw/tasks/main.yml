@@ -40,7 +40,7 @@
   become_user: mdw
   become: true
   when:
-   - ansible_distribution == 'RedHat'
+   - ansible_os_family == 'RedHat'
    - ansible_distribution_major_version == '7'
    - not mdw_hgrc.stat.exists or not mdw_bin.stat.exists
 
@@ -53,7 +53,7 @@
   become_user: mdw
   become: true
   when:
-   - ansible_distribution == 'RedHat'
+   - ansible_os_family == 'RedHat'
    - ansible_distribution_major_version == '8'
    - not mdw_hgrc.stat.exists or not mdw_bin.stat.exists
 
@@ -71,7 +71,7 @@
    "https://people.redhat.com/~mwatts/bits/nvi-1.81.6-12.el7.centos.x86_64.rpm"
   when:
    - not nvi_stat.stat.exists
-   - ansible_distribution == 'RedHat'
+   - ansible_os_family == 'RedHat'
    - ansible_distribution_major_version == '7'
 
 - name: nvi
@@ -82,7 +82,7 @@
    "https://dl.fedoraproject.org/pub/fedora/linux/releases/27/Everything/x86_64/os/Packages/n/nvi-1.81.6-17.fc27.x86_64.rpm"
   when:
    - not nvi_stat.stat.exists
-   - ansible_distribution == 'RedHat'
+   - ansible_os_family == 'RedHat'
    - ansible_distribution_major_version == '8'
 
 - name: nvi
