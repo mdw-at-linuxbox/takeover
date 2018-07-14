@@ -4,35 +4,44 @@ standard_users:
   uid: 1003
   group: 100
   fullname: Thomas Serlin
+  shell: /bin/bash
 - loginid: ali
   uid: 1004
   group: 100
   fullname: Ali Maredia
+  shell: /bin/bash
 - loginid: mbenjamin
   uid: 1007
   group: 100
   fullname: Matt W. Benjamin
+  shell: /bin/bash
 - loginid: cbodley
   uid: 1041
   group: 100
   fullname: Casey Bodley
+  shell: /bin/bash
 - loginid: dang
   uid: 1042
   group: 100
   fullname: Daniel Gryniewicz
+  shell: /bin/bash
 - loginid: ivancich
   uid: 1031
   group: 100
   fullname: J. Eric Ivancich
+  shell: /bin/bash
 - loginid: aemerson
   uid: 1035
   group: 100
   fullname: Adam Emerson
+  shell: /bin/bash
 - loginid: bill
   uid: 1044
   group: 100
   fullname: William Simpson
+  shell: /bin/bash
 - loginid: mdw
   uid: 25131
   group: 100
   fullname: Marcus Watts
+  shell: /bin/bash
