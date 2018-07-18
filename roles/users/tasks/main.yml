@@ -11,6 +11,7 @@
     comment: "{{ item.fullname }}"
     uid: "{{ item.uid }}"
     group: "{{ item.group if item.group is defined else 100 }}"
+    shell: "{{ item.shell if item.shell is defined else None }}"
     password: "{{ default_user_pass if default_user_pass is defined else None }}"
   with_items: "{{ standard_users }}"
   become: true
