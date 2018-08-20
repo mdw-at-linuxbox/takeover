@@ -21,6 +21,17 @@
    - ansible_os_family == 'RedHat'
    - ansible_distribution_major_version == '8'
 
+# install basic stuff
+- name: install rng-tools
+  dnf:
+    name: "{{ item }}"
+    state: present
+  with_items: [ rng-tools ]
+  become: true
+  when:
+   - ansible_os_family == 'RedHat'
+   - ansible_distribution == 'Fedora'
+
 - name: enable rngd
   tags: test3
   systemd:

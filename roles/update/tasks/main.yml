@@ -42,6 +42,16 @@
    - ansible_os_family == 'RedHat'
    - ansible_distribution_major_version == '8'
 
+- name: install more stuff for fedora
+  dnf:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ more_stuff_fc }}"
+  become: true
+  when:
+   - ansible_os_family == 'RedHat'
+   - ansible_distribution == 'Fedora'
+
 - name: update
   tags: baz
   apt:

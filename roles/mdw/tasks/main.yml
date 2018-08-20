@@ -57,6 +57,19 @@
    - ansible_distribution_major_version == '8'
    - not mdw_hgrc.stat.exists or not mdw_bin.stat.exists
 
+- name: extract mdw tarballs
+  tags: mdw
+  unarchive:
+    src: "{{ item }}"
+    dest: "/home/mdw"
+  with_items: "{{ mdw_tar_files_fc }}"
+  become_user: mdw
+  become: true
+  when:
+   - ansible_os_family == 'RedHat'
+   - ansible_distribution == 'Fedora'
+   - not mdw_hgrc.stat.exists or not mdw_bin.stat.exists
+
 - name: see if nvi installed
   tags: bar
   stat: path=/usr/bin/nvi
@@ -84,6 +97,17 @@
    - not nvi_stat.stat.exists
    - ansible_os_family == 'RedHat'
    - ansible_distribution_major_version == '8'
+
+- name: nvi
+  tags: bar
+  dnf:
+   name: nvi
+   state: latest
+  become: true
+  when:
+   - not nvi_stat.stat.exists
+   - ansible_os_family == 'RedHat'
+   - ansible_distribution == 'Fedora'
 
 - name: nvi
   tags: bar
