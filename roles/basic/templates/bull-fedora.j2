@@ -1,0 +1,39 @@
+[bull-fedora]
+name=Bull Fedora
+baseurl=http://bull.eng.arb.redhat.com/pub/fedora/$releasever/releases/Everything/$basearch/os
+enabled=1
+gpgcheck=1
+cost=500
+skip_if_unavailable=True
+
+[bull-fedora-debugging]
+name=Bull Fedora (Debugging)
+baseurl=http://bull.eng.arb.redhat.com/pub/fedora/$releasever/releases/Everything/$basearch/debug
+enabled=0
+gpgcheck=1
+cost=500
+skip_if_unavailable=True
+
+[bull-updates]
+name=Bull Fedora Updates
+baseurl=http://bull.eng.arb.redhat.com/pub/fedora/$releasever/updates/$basearch
+enabled=1
+gpgcheck=1
+cost=500
+skip_if_unavailable=True
+
+[bull-source]
+name=Bull Fedora Source
+baseurl=http://bull.eng.arb.redhat.com/pub/fedora/$releasever/releases/Everything/source/tree
+enabled=0
+gpgcheck=1
+cost=500
+skip_if_unavailable=True
+
+[bull-updates-source]
+name=Bull Fedora Source (Updates)
+baseurl=http://bull.eng.arb.redhat.com/pub/fedora/$releasever/updates/SRPMS
+enabled=0
+gpgcheck=1
+cost=500
+skip_if_unavailable=True

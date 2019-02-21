@@ -1,4 +1,17 @@
 ---
+# local custom repo
+- name: bull repo
+  template:
+    src: bull-fedora.j2
+    dest: /etc/yum.repos.d/bull.repo
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+  when:
+   - ansible_os_family == 'RedHat'
+   - ansible_distribution == 'Fedora'
+
 # install basic stuff
 - name: install rng-tools
   yum:
