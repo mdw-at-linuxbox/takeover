@@ -35,9 +35,8 @@
 
 - name: install more stuff for el7
   yum:
-    name: "{{ item }}"
+    name: "{{ more_stuff_el7 }}"
     state: present
-  with_items: "{{ more_stuff_el7 }}"
   become: true
   when:
    - ansible_os_family == 'RedHat'
@@ -45,9 +44,8 @@
 
 - name: install more stuff for el8
   dnf:
-    name: "{{ item }}"
+    name: "{{ more_stuff_el8 }}"
     state: present
-  with_items: "{{ more_stuff_el8 }}"
   become: true
   when:
    - ansible_os_family == 'RedHat'
@@ -55,9 +53,8 @@
 
 - name: install more stuff for fedora
   dnf:
-    name: "{{ item }}"
+    name: "{{ more_stuff_fc }}"
     state: present
-  with_items: "{{ more_stuff_fc }}"
   become: true
   when:
    - ansible_os_family == 'RedHat'
