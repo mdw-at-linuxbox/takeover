@@ -92,7 +92,7 @@
   raw: "yum install -y {{ item }}"
   become: true
   with_items: |
-   "https://dl.fedoraproject.org/pub/fedora/linux/releases/27/Everything/x86_64/os/Packages/n/nvi-1.81.6-17.fc27.x86_64.rpm"
+   "https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/27/Everything/x86_64/os/Packages/n/nvi-1.81.6-17.fc27.x86_64.rpm"
   when:
    - not nvi_stat.stat.exists
    - ansible_os_family == 'RedHat'
@@ -134,3 +134,37 @@
    - { name: 'vi', path: '/usr/bin/nvi' }
    - { name: 'view', path: '/usr/bin/nview' }
    - { name: 'ex', path: '/usr/bin/nex' }
+
+- name: see if rcs installed
+  tags: bar
+  stat: path=/usr/bin/rcs
+  check_mode: no
+  register: rcs_stat
+
+- name: rcs
+  tags: bar
+  raw: "dnf install -y {{ item }}"
+  become: true
+  with_items: |
+   "https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/28/Everything/x86_64/os/Packages/r/rcs-5.9.4-9.fc28.x86_64.rpm"
+  when:
+   - not rcs_stat.stat.exists
+   - ansible_os_family == 'RedHat'
+   - ansible_distribution_major_version == '8'
+
+- name: see if lynx installed
+  tags: bar
+  stat: path=/usr/bin/lynx
+  check_mode: no
+  register: lynx_stat
+
+- name: lynx
+  tags: bar
+  raw: "dnf install -y {{ item }}"
+  become: true
+  with_items: |
+   "https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/28/Everything/x86_64/os/Packages/l/lynx-2.8.9-0.22.dev16.fc28.x86_64.rpm"
+  when:
+   - not lynx_stat.stat.exists
+   - ansible_os_family == 'RedHat'
+   - ansible_distribution_major_version == '8'

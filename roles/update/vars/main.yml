@@ -117,10 +117,8 @@ more_stuff_el8:
 - ftp
 - gdb
 - git
-- groff
 - hdparm
 - lsof
-- lynx
 - mailx
 - make
 - man
@@ -130,7 +128,6 @@ more_stuff_el8:
 - net-tools
 - parted
 - pciutils
-- rdate
 - rsync
 - sos
 - strace
@@ -146,11 +143,6 @@ more_stuff_el8:
 - xauth
 - xorg-x11-xbitmaps
 - xterm
-- xz-lzma-compat
-- yum-plugin-downloadonly
-- yum-plugin-keys
-- yum-plugin-local
-- yum-plugin-verify
 - yum-utils
 - zip
 more_stuff_fc:
