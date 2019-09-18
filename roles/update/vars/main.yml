@@ -1,5 +1,5 @@
 ---
-more_stuff_ubuntu:
+more_stuff_ubuntu: &debstuff
 - acct
 - acl
 - apt-listchanges
@@ -53,6 +53,7 @@ more_stuff_ubuntu:
 - xterm
 - xzdec
 - zip
+more_stuff_debian: *debstuff
 more_stuff_el7:
 - bc
 - bind-utils

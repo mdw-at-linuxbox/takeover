@@ -19,7 +19,7 @@
   check_mode: no
   register: mdw_hgrc
 
-- name: extract mdw tarballs
+- name: extract mdw tarballs for ubuntu
   tags: mdw
   unarchive:
     src: "{{ item }}"
@@ -31,7 +31,19 @@
    - ansible_distribution == 'Ubuntu'
    - not mdw_hgrc.stat.exists or not mdw_bin.stat.exists
 
-- name: extract mdw tarballs
+- name: extract mdw tarballs for debian
+  tags: mdw
+  unarchive:
+    src: "{{ item }}"
+    dest: "/home/mdw"
+  with_items: "{{ mdw_tar_files_deb }}"
+  become_user: mdw
+  become: true
+  when:
+   - ansible_distribution == 'Debian'
+   - not mdw_hgrc.stat.exists or not mdw_bin.stat.exists
+
+- name: extract mdw tarballs for el7
   tags: mdw
   unarchive:
     src: "{{ item }}"
@@ -44,7 +56,7 @@
    - ansible_distribution_major_version == '7'
    - not mdw_hgrc.stat.exists or not mdw_bin.stat.exists
 
-- name: extract mdw tarballs
+- name: extract mdw tarballs for el8
   tags: mdw
   unarchive:
     src: "{{ item }}"
@@ -57,7 +69,7 @@
    - ansible_distribution_major_version == '8'
    - not mdw_hgrc.stat.exists or not mdw_bin.stat.exists
 
-- name: extract mdw tarballs
+- name: extract mdw tarballs for fedora
   tags: mdw
   unarchive:
     src: "{{ item }}"
@@ -98,7 +110,7 @@
    - ansible_os_family == 'RedHat'
    - ansible_distribution_major_version == '8'
 
-- name: nvi
+- name: stat nvi for fedora
   tags: bar
   dnf:
    name: nvi
@@ -109,7 +121,7 @@
    - ansible_os_family == 'RedHat'
    - ansible_distribution == 'Fedora'
 
-- name: nvi
+- name: stat nvi for debian
   tags: bar
   apt:
    name: "{{ item }}"
@@ -120,7 +132,7 @@
    - nvi-doc
   when:
    - not nvi_stat.stat.exists
-   - ansible_distribution == 'Ubuntu'
+   - ansible_distribution_file_variety == 'Debian'
 
 - name: update vi alternatives
   tags: bar
@@ -129,7 +141,7 @@
    path: "{{ item.path }}"
   become: true
   when:
-   - ansible_distribution == 'Ubuntu'
+   - ansible_distribution_file_variety == 'Debian'
   loop:
    - { name: 'vi', path: '/usr/bin/nvi' }
    - { name: 'view', path: '/usr/bin/nview' }

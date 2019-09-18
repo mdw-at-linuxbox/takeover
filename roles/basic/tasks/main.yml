@@ -62,7 +62,8 @@
   with_items: [ haveged ]
   become: true
   when:
-   - ansible_distribution == 'Ubuntu'
+   - ansible_distribution_file_variety == 'Debian'
+   - "{{ 'haveged' not in package_blacklist }}"
 
 - name: timezone
   timezone:
