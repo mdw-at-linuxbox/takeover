@@ -122,9 +122,8 @@
 - name: install more stuff for ubuntu
   tags: jam
   apt:
-    name: "{{ item }}"
+    name: "{{ more_stuff_ubuntu }}"
     state: present
-  with_items: "{{ more_stuff_ubuntu }}"
   become: true
   when:
    - ansible_distribution == 'Ubuntu'
@@ -132,9 +131,8 @@
 - name: install more stuff for debian
   tags: jam
   apt:
-    name: "{{ item }}"
+    name: "{{ more_stuff_debian }}"
     state: present
-  with_items: "{{ more_stuff_debian }}"
   become: true
   when:
    - ansible_distribution == 'Debian'

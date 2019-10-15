@@ -90,10 +90,8 @@
 
 - name: nvi
   tags: bar
-  raw: "yum install -y {{ item }}"
+  raw: "yum install -y {{ nvi_el7 }}"
   become: true
-  with_items: |
-   "https://people.redhat.com/~mwatts/bits/nvi-1.81.6-12.el7.centos.x86_64.rpm"
   when:
    - not nvi_stat.stat.exists
    - ansible_os_family == 'RedHat'
@@ -101,16 +99,14 @@
 
 - name: nvi
   tags: bar
-  raw: "yum install -y {{ item }}"
+  raw: "yum install -y {{ nvi_el8 }}"
   become: true
-  with_items: |
-   "https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/27/Everything/x86_64/os/Packages/n/nvi-1.81.6-17.fc27.x86_64.rpm"
   when:
    - not nvi_stat.stat.exists
    - ansible_os_family == 'RedHat'
    - ansible_distribution_major_version == '8'
 
-- name: stat nvi for fedora
+- name: install nvi for fedora
   tags: bar
   dnf:
    name: nvi
@@ -121,15 +117,14 @@
    - ansible_os_family == 'RedHat'
    - ansible_distribution == 'Fedora'
 
-- name: stat nvi for debian
+- name: install nvi for debian
   tags: bar
   apt:
-   name: "{{ item }}"
-   state: present
-  become: true
-  with_items:
+   name:
    - nvi
    - nvi-doc
+   state: present
+  become: true
   when:
    - not nvi_stat.stat.exists
    - ansible_distribution_file_variety == 'Debian'
@@ -155,10 +150,8 @@
 
 - name: rcs
   tags: bar
-  raw: "dnf install -y {{ item }}"
+  raw: "dnf install -y {{ rcs_el8 }}"
   become: true
-  with_items: |
-   "https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/28/Everything/x86_64/os/Packages/r/rcs-5.9.4-9.fc28.x86_64.rpm"
   when:
    - not rcs_stat.stat.exists
    - ansible_os_family == 'RedHat'
@@ -172,10 +165,8 @@
 
 - name: lynx
   tags: bar
-  raw: "dnf install -y {{ item }}"
+  raw: "dnf install -y {{ lynx_el8 }}"
   become: true
-  with_items: |
-   "https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/28/Everything/x86_64/os/Packages/l/lynx-2.8.9-0.22.dev16.fc28.x86_64.rpm"
   when:
    - not lynx_stat.stat.exists
    - ansible_os_family == 'RedHat'

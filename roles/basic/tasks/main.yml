@@ -15,9 +15,8 @@
 # install basic stuff
 - name: install rng-tools
   yum:
-    name: "{{ item }}"
+    name: rng-tools
     state: present
-  with_items: [ rng-tools ]
   become: true
   when:
    - ansible_os_family == 'RedHat'
@@ -26,9 +25,8 @@
 # install basic stuff
 - name: install rng-tools
   dnf:
-    name: "{{ item }}"
+    name: rng-tools
     state: present
-  with_items: [ rng-tools ]
   become: true
   when:
    - ansible_os_family == 'RedHat'
@@ -37,9 +35,8 @@
 # install basic stuff
 - name: install rng-tools
   dnf:
-    name: "{{ item }}"
+    name: rng-tools
     state: present
-  with_items: [ rng-tools ]
   become: true
   when:
    - ansible_os_family == 'RedHat'
@@ -57,9 +54,8 @@
 
 - name: install haveged
   apt:
-    name: "{{ item }}"
+    name: haveged
     state: present
-  with_items: [ haveged ]
   become: true
   when:
    - ansible_distribution_file_variety == 'Debian'
