@@ -90,11 +90,11 @@
    - name: 'krb5-config'
      question: "krb5-config/add_servers_realm"
      vtype: string
-     value: 'SHARK.COHORTFS.COM'
+     value: 'SHARK.REDHAT.COM'
    - name: 'krb5-config'
      question: "krb5-config/default_realm"
      vtype: string
-     value: 'SHARK.COHORTFS.COM'
+     value: 'SHARK.REDHAT.COM'
    - name: 'krb5-config'
      question: "krb5-config/read_conf"
      vtype: boolean
@@ -102,11 +102,11 @@
    - name: 'krb5-config'
      question: "krb5-config/kerberos_servers"
      vtype: string
-     value: 'bull.eng.arb.redhat.com'
+     value: 'creek.eng.arb.redhat.com'
    - name: 'krb5-config'
      question: "krb5-config/admin_server"
      vtype: string
-     value: 'bull.eng.arb.redhat.com'
+     value: 'creek.eng.arb.redhat.com'
    - name: 'krb5-config'
      question: "krb5-config/add_servers"
      vtype: boolean
