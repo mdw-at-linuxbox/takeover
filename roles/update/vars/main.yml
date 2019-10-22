@@ -34,6 +34,7 @@ more_stuff_ubuntu: &debstuff
 - rcs
 - rdate
 - rpm2cpio
+- rsync
 - traceroute
 - udftools
 - units
