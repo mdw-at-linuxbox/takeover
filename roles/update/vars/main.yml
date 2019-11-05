@@ -23,6 +23,7 @@ more_stuff_ubuntu: &debstuff
 - krb5-multidev
 - krb5-user
 - locate
+- ltrace
 - make
 - manpages-dev
 - ncurses-term
@@ -35,6 +36,7 @@ more_stuff_ubuntu: &debstuff
 - rdate
 - rpm2cpio
 - rsync
+- tmux
 - traceroute
 - udftools
 - units
@@ -45,6 +47,7 @@ more_stuff_ubuntu: &debstuff
 - x11-xkb-utils
 - x11-xserver-utils
 - xbitmaps
+- xclip
 - xfonts-100dpi
 - xfonts-75dpi
 - xfonts-base
@@ -58,6 +61,7 @@ more_stuff_debian: *debstuff
 more_stuff_el7:
 - bc
 - bind-utils
+- deltarpm
 - dmidecode
 - dump
 - ed
@@ -70,6 +74,7 @@ more_stuff_el7:
 - groff
 - hdparm
 - lsof
+- ltrace
 - lynx
 - mailx
 - make
@@ -91,6 +96,7 @@ more_stuff_el7:
 - tar
 - tcpdump
 - time
+- tmux
 - traceroute
 - udftools
 - units
@@ -99,6 +105,7 @@ more_stuff_el7:
 - whois
 - words
 - xauth
+- xclip
 - xorg-x11-xbitmaps
 - xterm
 - xz-lzma-compat
@@ -111,6 +118,7 @@ more_stuff_el7:
 more_stuff_el8:
 - bc
 - bind-utils
+- deltarpm
 - dmidecode
 - dump
 - ed
@@ -121,6 +129,7 @@ more_stuff_el8:
 - git
 - hdparm
 - lsof
+- ltrace
 - mailx
 - make
 - man
@@ -137,12 +146,15 @@ more_stuff_el8:
 - tar
 - tcpdump
 - time
+- tmux
 - traceroute
 - units
 - unzip
+- util-linux-user
 - wget
 - words
 - xauth
+- xclip
 - xorg-x11-xbitmaps
 - xterm
 - yum-utils
@@ -150,6 +162,7 @@ more_stuff_el8:
 more_stuff_fc:
 - bc
 - bind-utils
+- bvi
 - deltarpm
 - dmidecode
 - dnf-utils
@@ -174,6 +187,7 @@ more_stuff_fc:
 - net-tools
 - parted
 - pciutils
+- rcs
 - rdate
 - rsync
 - sos
