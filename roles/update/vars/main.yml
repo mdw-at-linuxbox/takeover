@@ -157,7 +157,7 @@ more_stuff_fc:
 - ethtool
 - ftp
 - gdb
-- git
+- "{{ 'git' if (ansible_distribution_version is version_compare('31','<')) else 'git-core' }}"
 - groff
 - hdparm
 - lsof
@@ -188,9 +188,9 @@ more_stuff_fc:
 - xorg-x11-xbitmaps
 - xterm
 - xz-lzma-compat
-- yum-plugin-downloadonly
-- yum-plugin-keys
-- yum-plugin-local
-- yum-plugin-verify
+- "{{ 'yum-plugin-downloadonly' if (ansible_distribution_version is version_compare('31','<')) else [] }}"
+- "{{ 'yum-plugin-keys' if (ansible_distribution_version is version_compare('31','<')) else [] }}"
+- "{{ 'yum-plugin-local' if (ansible_distribution_version is version_compare('31','<')) else [] }}"
+- "{{ 'yum-plugin-verify' if (ansible_distribution_version is version_compare('31','<')) else [] }}"
 - yum-utils
 - zip

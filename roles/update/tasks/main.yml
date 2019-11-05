@@ -35,7 +35,7 @@
 
 - name: install more stuff for el7
   yum:
-    name: "{{ more_stuff_el7 }}"
+    name: "{{ more_stuff_el7 | flatten }}"
     state: present
   become: true
   when:
@@ -44,7 +44,7 @@
 
 - name: install more stuff for el8
   dnf:
-    name: "{{ more_stuff_el8 }}"
+    name: "{{ more_stuff_el8 | flatten }}"
     state: present
   become: true
   when:
@@ -53,7 +53,7 @@
 
 - name: install more stuff for fedora
   dnf:
-    name: "{{ more_stuff_fc }}"
+    name: "{{ more_stuff_fc | flatten }}"
     state: present
   become: true
   when:
@@ -122,7 +122,7 @@
 - name: install more stuff for ubuntu
   tags: jam
   apt:
-    name: "{{ more_stuff_ubuntu }}"
+    name: "{{ more_stuff_ubuntu | flatten }}"
     state: present
   become: true
   when:
@@ -131,7 +131,7 @@
 - name: install more stuff for debian
   tags: jam
   apt:
-    name: "{{ more_stuff_debian }}"
+    name: "{{ more_stuff_debian | flatten }}"
     state: present
   become: true
   when:

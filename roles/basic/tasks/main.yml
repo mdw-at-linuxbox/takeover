@@ -14,33 +14,14 @@
 
 # install basic stuff
 - name: install rng-tools
-  yum:
-    name: rng-tools
-    state: present
-  become: true
-  when:
-   - ansible_os_family == 'RedHat'
-   - ansible_distribution_major_version == '7'
-
-# install basic stuff
-- name: install rng-tools
   dnf:
     name: rng-tools
     state: present
   become: true
   when:
-   - ansible_os_family == 'RedHat'
-   - ansible_distribution_major_version == '8'
-
-# install basic stuff
-- name: install rng-tools
-  dnf:
-    name: rng-tools
-    state: present
-  become: true
-  when:
-   - ansible_os_family == 'RedHat'
-   - ansible_distribution == 'Fedora'
+   - "ansible_os_family == 'RedHat'"
+   - "'rng-tools' not in package_blacklist"
+   - "ansible_virtualization_type not in [ 'lxc', 'docker' ]"
 
 - name: enable rngd
   tags: test3
@@ -50,7 +31,9 @@
    state: started
   become: true
   when:
-   - ansible_os_family == 'RedHat'
+   - "ansible_os_family == 'RedHat'"
+   - "'rng-tools' not in package_blacklist"
+   - "ansible_virtualization_type not in [ 'lxc', 'docker' ]"
 
 - name: install haveged
   apt:
@@ -58,13 +41,22 @@
     state: present
   become: true
   when:
-   - ansible_distribution_file_variety == 'Debian'
-   - "{{ 'haveged' not in package_blacklist }}"
+   - "ansible_distribution_file_variety == 'Debian'"
+   - "'haveged' not in package_blacklist"
+   - "ansible_virtualization_type not in [ 'lxc', 'docker' ]"
 
 - name: timezone
   timezone:
     name: America/Detroit
   become: true
+
+- name: need hostname command
+  package:
+    name: hostname
+    state: present
+  become: true
+  when:
+   - "'hostname' not in package_blacklist"
 
 - name: get ephemeral hostname
   command: hostname
