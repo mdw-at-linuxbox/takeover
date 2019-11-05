@@ -150,7 +150,9 @@ more_stuff_el8:
 more_stuff_fc:
 - bc
 - bind-utils
+- deltarpm
 - dmidecode
+- dnf-utils
 - dump
 - ed
 - eject
@@ -161,6 +163,7 @@ more_stuff_fc:
 - groff
 - hdparm
 - lsof
+- ltrace
 - lynx
 - mailx
 - make
@@ -179,12 +182,15 @@ more_stuff_fc:
 - tar
 - tcpdump
 - time
+- tmux
 - traceroute
 - units
 - unzip
+- util-linux-user
 - wget
 - words
 - xauth
+- xclip
 - xorg-x11-xbitmaps
 - xterm
 - xz-lzma-compat
@@ -192,5 +198,4 @@ more_stuff_fc:
 - "{{ 'yum-plugin-keys' if (ansible_distribution_version is version_compare('31','<')) else [] }}"
 - "{{ 'yum-plugin-local' if (ansible_distribution_version is version_compare('31','<')) else [] }}"
 - "{{ 'yum-plugin-verify' if (ansible_distribution_version is version_compare('31','<')) else [] }}"
-- yum-utils
 - zip
