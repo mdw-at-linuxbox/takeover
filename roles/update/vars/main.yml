@@ -58,6 +58,11 @@ more_stuff_ubuntu: &debstuff
 - xzdec
 - zip
 more_stuff_debian: *debstuff
+#
+# el7 considerations.
+# xclip is epel.  need to think about that.
+# xclip
+#
 more_stuff_el7:
 - bc
 - bind-utils
@@ -105,7 +110,6 @@ more_stuff_el7:
 - whois
 - words
 - xauth
-- xclip
 - xorg-x11-xbitmaps
 - xterm
 - xz-lzma-compat
