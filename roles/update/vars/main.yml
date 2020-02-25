@@ -119,10 +119,13 @@ more_stuff_el7:
 - yum-plugin-verify
 - yum-utils
 - zip
+#
+# xclip and deltarpm are not in centos8
+# xclip might be in epel...
+#
 more_stuff_el8:
 - bc
 - bind-utils
-- deltarpm
 - dmidecode
 - dump
 - ed
@@ -158,7 +161,6 @@ more_stuff_el8:
 - wget
 - words
 - xauth
-- xclip
 - xorg-x11-xbitmaps
 - xterm
 - yum-utils
