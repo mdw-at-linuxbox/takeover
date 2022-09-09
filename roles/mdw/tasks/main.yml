@@ -109,8 +109,9 @@
 - name: install nvi for fedora
   tags: bar
   dnf:
-   name: nvi
-   state: latest
+   name: "{{ nvi_fed }}"
+   disable_gpg_check: yes
+   state: present
   become: true
   when:
    - not nvi_stat.stat.exists
