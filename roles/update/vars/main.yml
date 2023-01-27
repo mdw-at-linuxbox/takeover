@@ -165,6 +165,53 @@ more_stuff_el8:
 - xterm
 - yum-utils
 - zip
+#
+# xclip and deltarpm are not in centos9
+# rcs and xclip are in epel...
+# dump and mailx are not in centos9
+# lynx is present
+#
+more_stuff_el9:
+- bc
+- bind-utils
+- dmidecode
+- ed
+- eject
+- ethtool
+- ftp
+- gdb
+- git
+- hdparm
+- lsof
+- ltrace
+- lynx
+- make
+- man
+- mlocate
+- nc
+- ncurses-term
+- net-tools
+- parted
+- pciutils
+- rsync
+- sos
+- strace
+- sysstat
+- tar
+- tcpdump
+- time
+- tmux
+- traceroute
+- units
+- unzip
+- util-linux-user
+- wget
+- words
+- xauth
+- xorg-x11-xbitmaps
+- xterm
+- yum-utils
+- zip
 more_stuff_fc:
 - bc
 - bind-utils

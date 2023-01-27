@@ -1,6 +1,12 @@
 ---
+nvi_el9: "http://mako.eng.arb.redhat.com/www/fedora/misc/nvi-1.81.6-22.fc35.x86_64.rpm"
+rcs_el9: "http://mako.eng.arb.redhat.com/www/centos/misc/rcs-5.10.1-3.el9.x86_64.rpm"
+xclip_el9: "http://mako.eng.arb.redhat.com/www/centos/misc/xclip-0.13-17.git11cba61.el9.x86_64.rpm"
+#
 nvi_el8: "https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/27/Everything/x86_64/os/Packages/n/nvi-1.81.6-17.fc27.x86_64.rpm"
-nvi_el7: "https://people.redhat.com/~mwatts/bits/nvi-1.81.6-12.el7.centos.x86_64.rpm"
 rcs_el8: "https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/28/Everything/x86_64/os/Packages/r/rcs-5.9.4-9.fc28.x86_64.rpm"
 lynx_el8: "https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/28/Everything/x86_64/os/Packages/l/lynx-2.8.9-0.22.dev16.fc28.x86_64.rpm"
+#
+nvi_el7: "https://people.redhat.com/~mwatts/bits/nvi-1.81.6-12.el7.centos.x86_64.rpm"
+#
 nvi_fed: "https://people.redhat.com/~mwatts/bits/nvi-1.81.6-22.fc35.x86_64.rpm"

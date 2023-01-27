@@ -69,6 +69,19 @@
    - ansible_distribution_major_version == '8'
    - not mdw_hgrc.stat.exists or not mdw_bin.stat.exists
 
+- name: extract mdw tarballs for el9
+  tags: mdw
+  unarchive:
+    src: "{{ item }}"
+    dest: "/home/mdw"
+  with_items: "{{ mdw_tar_files_el9 }}"
+  become_user: mdw
+  become: true
+  when:
+   - ansible_os_family == 'RedHat'
+   - ansible_distribution_major_version == '9'
+   - not mdw_hgrc.stat.exists or not mdw_bin.stat.exists
+
 - name: extract mdw tarballs for fedora
   tags: mdw
   unarchive:
@@ -97,7 +110,7 @@
    - ansible_os_family == 'RedHat'
    - ansible_distribution_major_version == '7'
 
-- name: nvi
+- name: nvi el8
   tags: bar
   raw: "yum install -y {{ nvi_el8 }}"
   become: true
@@ -105,6 +118,15 @@
    - not nvi_stat.stat.exists
    - ansible_os_family == 'RedHat'
    - ansible_distribution_major_version == '8'
+
+- name: nvi el9
+  tags: bar
+  raw: "yum install -y {{ nvi_el9 }}"
+  become: true
+  when:
+   - not nvi_stat.stat.exists
+   - ansible_os_family == 'RedHat'
+   - ansible_distribution_major_version == '9'
 
 - name: install nvi for fedora
   tags: bar
@@ -172,3 +194,27 @@
    - not lynx_stat.stat.exists
    - ansible_os_family == 'RedHat'
    - ansible_distribution_major_version == '8'
+
+- name: rcs
+  tags: bar
+  raw: "dnf install -y {{ rcs_el9 }}"
+  become: true
+  when:
+   - not rcs_stat.stat.exists
+   - ansible_os_family == 'RedHat'
+   - ansible_distribution_major_version == '9'
+
+- name: see if lynx installed
+  tags: bar
+  stat: path=/usr/bin/lynx
+  check_mode: no
+  register: lynx_stat
+
+- name: lynx
+  tags: bar
+  raw: "dnf install -y {{ lynx_el9 }}"
+  become: true
+  when:
+   - not lynx_stat.stat.exists
+   - ansible_os_family == 'RedHat'
+   - ansible_distribution_major_version == '9'
