@@ -3,3 +3,4 @@ files/*
 group_vars/*
 ,*
 *.retry
+README.pdf
