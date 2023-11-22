@@ -64,6 +64,7 @@ more_stuff_debian: *debstuff
 # xclip
 #
 more_stuff_el7:
+- acl
 - bc
 - bind-utils
 - deltarpm
@@ -124,6 +125,7 @@ more_stuff_el7:
 # xclip might be in epel...
 #
 more_stuff_el8:
+- acl
 - bc
 - bind-utils
 - dmidecode
@@ -172,6 +174,7 @@ more_stuff_el8:
 # lynx is present
 #
 more_stuff_el9:
+- acl
 - bc
 - bind-utils
 - dmidecode
@@ -213,6 +216,7 @@ more_stuff_el9:
 - yum-utils
 - zip
 more_stuff_fc:
+- acl
 - bc
 - bind-utils
 - bvi
